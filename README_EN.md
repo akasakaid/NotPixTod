@@ -70,7 +70,7 @@ The following describes the contents of config.json
 
 This script / program also supports several parameter arguments that can be used, here is an explanation of the argument 
 
-`--data` / `-D` can be used when you have different file names to store account data. By default the file name used by this script / program to store account data is `data.txt`, if you have a file called `query.txt` as a file that stores account data then just run `bot.py` by adding the argumetn `--data` / `-D`. Example `python bot.py --data query.txt`
+<!-- `--data` / `-D` can be used when you have different file names to store account data. By default the file name used by this script / program to store account data is `data.txt`, if you have a file called `query.txt` as a file that stores account data then just run `bot.py` by adding the argumetn `--data` / `-D`. Example `python bot.py --data query.txt` -->
 
 `--proxy` / `-P` can be used when you have different file names to store the proxy list. The file name used by this script/program to store the proxy list is `proxies.txt`, suppose you have a file called `prox.txt` as the file that stores the proxy list, you just need to add the `--proxy` / `-P` parameter argument to be able to use your proxy file. Example `python bot.py --proxy prox.txt`
 
