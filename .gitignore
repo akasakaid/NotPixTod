@@ -5,3 +5,4 @@ sessions
 *.sqlite3
 *.log
 *.txt
+!requirements.txt
