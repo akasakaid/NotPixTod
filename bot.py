@@ -210,7 +210,7 @@ class NotPixTod:
                     twofa = input(
                         f"{white}[{yellow}?{white}] {yellow}input 2fa password : {reset}"
                     )
-                    await client.start(password=twofa)
+                    await client.sign_in(phone=phone,password=twofa)
             me = await client.get_me()
             uid = me.id
             first_name = me.first_name
