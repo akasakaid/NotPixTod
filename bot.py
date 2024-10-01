@@ -358,6 +358,7 @@ async def main():
     arg.add_argument("--marin", action="store_true")
     arg.add_argument("--disable-log", action="store_true")
     args = arg.parse_args()
+    proxy_file = args.proxy
     disable_log = args.disable_log
     async with aiofiles.open("config.json") as r:
         read = await r.read()
