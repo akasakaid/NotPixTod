@@ -71,7 +71,7 @@ Berikut penjelasan untuk tentang isi config.json
 
 Script / program ini juga mendukung beberapa argument parameter yang bisa dipakai, berikut adalah penjelasan argument 
 
-`--data` / `-D` bisa digunakan ketika anda mempunyai nama file yang berbeda untuk menyimpan data akun. Secara bawaan nama file yang digunakan oleh script / program ini untuk menyimpan data akun adalah `data.txt`, semisal anda mempunyai file bernama `query.txt` sebagai file yang menyimpan data akun maka tinggal jalankan `bot.py` dengan menambahkan argumetn `--data` / `-D`. Contoh `python bot.py --data query.txt`
+<!-- `--data` / `-D` bisa digunakan ketika anda mempunyai nama file yang berbeda untuk menyimpan data akun. Secara bawaan nama file yang digunakan oleh script / program ini untuk menyimpan data akun adalah `data.txt`, semisal anda mempunyai file bernama `query.txt` sebagai file yang menyimpan data akun maka tinggal jalankan `bot.py` dengan menambahkan argumetn `--data` / `-D`. Contoh `python bot.py --data query.txt` -->
 
 `--proxy` / `-P` bisa digunakan ketika anda mempunyai nama file yang berbeda untuk menyimpan list proxy. Nama file yang digunakan oleh script / program ini untuk menyimpan daftar proxy adalah `proxies.txt`, semisal anda mempunyai file bernama `prox.txt` sebagai file yang menyimpan daftar proxy, anda hanya tinggal menambahkan argument parameter `--proxy` / `-P` untuk dapat menggunakan file proxy anda. Contoh `python bot.py --proxy prox.txt`
 
