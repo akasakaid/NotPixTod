@@ -1,0 +1,7 @@
+__pycache__
+config.json
+sessions
+*.session
+*.sqlite3
+*.log
+*.txt
