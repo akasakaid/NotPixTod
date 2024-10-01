@@ -405,8 +405,8 @@ async def main():
                 f"{white}[{yellow}?{white}] {yellow}input phone number : {reset}"
             )
             proxy = None
+            x = NotPixTod(no=0, config=config, proxies=proxies)
             if len(proxies) > 0:
-                x = NotPixTod(no=0, config=config, proxies=proxies)
                 unique = x.marinkitagawa(phone=phone)
                 proxy = proxies[unique]
                 transport = AsyncProxyTransport.from_url(proxy)
