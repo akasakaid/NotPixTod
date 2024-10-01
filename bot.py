@@ -324,7 +324,7 @@ def get_sessions():
     return glob(f"{ses_dir}/*.session")
 
 
-def get_datas():
+def get_datas(proxy_file):
     if not os.path.exists(proxy_file):
         open(proxy_file, "a")
     proxies = open(proxy_file).read().splitlines()
@@ -358,7 +358,6 @@ async def main():
     arg.add_argument("--marin", action="store_true")
     arg.add_argument("--disable-log", action="store_true")
     args = arg.parse_args()
-    proxy_file = args.proxy
     disable_log = args.disable_log
     async with aiofiles.open("config.json") as r:
         read = await r.read()
@@ -386,7 +385,7 @@ async def main():
     {white}3{green}. {white}Start Bot (Single Process)
     """
     sessions = get_sessions()
-    proxies = get_datas()
+    proxies = get_datas(proxy_file=args.proxy)
     your_data = f"""
 {white}Total session : {green}{len(sessions)}
 {white}Total proxy : {green}{len(proxies)}
@@ -418,7 +417,7 @@ async def main():
             continue
         elif option == "2":
             if args.worker:
-                worker = args.worker
+                worker = int(args.worker)
             else:
                 worker = int(os.cpu_count() / 2)
                 if worker <= 0:
@@ -426,7 +425,7 @@ async def main():
             sema = asyncio.Semaphore(worker)
             while True:
                 sessions = get_sessions()
-                proxies = get_datas()
+                proxies = get_datas(proxy_file=args.proxy)
                 tasks = [
                     asyncio.create_task(
                         bound(sema, (no, config, proxies), Path(phone).stem)
@@ -438,7 +437,7 @@ async def main():
         elif option == "3":
             while True:
                 sessions = get_sessions()
-                proxies = get_datas()
+                proxies = get_datas(proxy_file=args.proxy)
                 for no, phone in enumerate(sessions):
                     await NotPixTod(no=no, config=config, proxies=proxies).start(
                         phone=Path(phone).stem
