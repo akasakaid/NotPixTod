@@ -131,7 +131,7 @@ class NotPixTod:
                 if not self.cfg.disable_log:
                     async with aiofiles.open(log_file, "a", encoding="utf-8") as hw:
                         await hw.write(f"{res.status_code} {res.text}\n")
-                if "<title>" in res.text:
+                if "<title>" in res.text or "upstream request timeout" in res.text:
                     self.log(f"{yellow}failed get json response !")
                     await countdown(3)
                     continue
@@ -141,6 +141,7 @@ class NotPixTod:
                 httpx.ProxyError,
                 python_socks._errors.ProxyTimeoutError,
                 python_socks._errors.ProxyError,
+                python_socks._errors.ProxyConnectionError
             ):
                 proxy = self.get_random_proxy(0, israndom=True)
                 transport = AsyncProxyTransport.from_url(proxy)
@@ -197,6 +198,9 @@ class NotPixTod:
         )
         try:
             await client.connect()
+            if not await client.is_user_authorized() and return_data:
+                self.log(f"{yellow}{phone} is not authorized !")
+                return True
             if not await client.is_user_authorized():
                 try:
                     result = await client.send_code_request(phone=phone)
@@ -210,7 +214,7 @@ class NotPixTod:
                     twofa = input(
                         f"{white}[{yellow}?{white}] {yellow}input 2fa password : {reset}"
                     )
-                    await client.sign_in(phone=phone,password=twofa)
+                    await client.sign_in(phone=phone, password=twofa)
             me = await client.get_me()
             uid = me.id
             first_name = me.first_name

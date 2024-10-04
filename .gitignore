@@ -6,3 +6,5 @@ sessions
 *.log
 *.txt
 !requirements.txt
+tes.py
+README_JP.md
