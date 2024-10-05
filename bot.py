@@ -169,7 +169,8 @@ class NotPixTod:
     async def telegram_login(self, phone, proxy=None, return_data=False):
         if not os.path.exists(ses_dir):
             os.makedirs(ses_dir)
-        wtime = random.randint(self.cfg.swtime, self.cfg.ewtime)
+        if return_data:
+            wtime = random.randint(self.cfg.swtime, self.cfg.ewtime)
         await countdown(wtime)
         if proxy:
             split = proxy.split("://")
