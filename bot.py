@@ -141,7 +141,7 @@ class NotPixTod:
                 httpx.ProxyError,
                 python_socks._errors.ProxyTimeoutError,
                 python_socks._errors.ProxyError,
-                python_socks._errors.ProxyConnectionError
+                python_socks._errors.ProxyConnectionError,
             ):
                 proxy = self.get_random_proxy(0, israndom=True)
                 transport = AsyncProxyTransport.from_url(proxy)
@@ -200,7 +200,7 @@ class NotPixTod:
             await client.connect()
             if not await client.is_user_authorized() and return_data:
                 self.log(f"{yellow}{phone} is not authorized !")
-                return True
+                return None
             if not await client.is_user_authorized():
                 try:
                     result = await client.send_code_request(phone=phone)
