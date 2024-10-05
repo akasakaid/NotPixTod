@@ -6,3 +6,4 @@ anyio
 httpx-socks[asyncio]
 aiofiles
 fake-useragent
+aiosqlite
