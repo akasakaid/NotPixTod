@@ -171,7 +171,7 @@ class NotPixTod:
             os.makedirs(ses_dir)
         if return_data:
             wtime = random.randint(self.cfg.swtime, self.cfg.ewtime)
-        await countdown(wtime)
+            await countdown(wtime)
         if proxy:
             split = proxy.split("://")
             proxy_type = split[0]
