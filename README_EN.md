@@ -142,7 +142,7 @@ Here's how to use it in several operating systems
 
 5. Install the required library
    ```shell
-   python -m pip install -r requiremens.txt
+   python -m pip install -r requirements.txt
    ```
 
 6. Copy the `config.json.example` file to `config.json` or you can also rename the `config.json.example` file to `config.json`. Then customize the config according to your wishes, you can see [About Config.json](#about-configjson) for an explanation.
@@ -180,7 +180,7 @@ Here's how to use it in several operating systems
 
 5. Install the required libraries
    ```shell
-   python -m pip install -r requiremens.txt
+   python -m pip install -r requirements.txt
    ```
 
 6. Copy the `config.json.example` file to `config.json` or you can also rename the `config.json.example` file to `config.json`. Then customize the config according to your wishes, you can see [About Config.json](#about-configjson) for an explanation.
@@ -210,7 +210,7 @@ Here's how to use it in several operating systems
 
 11. Install the required library
    ```shell
-   python -m pip install -r requiremens.txt
+   python -m pip install -r requirements.txt
    ```
 
 12. Copy the `config.json.example` file to `config.json` or you can also rename the `config.json.example` file to `config.json`. Then customize the config according to your wishes, you can see [About Config.json](#about-configjson) for an explanation.

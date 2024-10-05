@@ -143,7 +143,7 @@ Berikut cara penggunaan dibeberapa operasi sistem
 
 5. Install library yang dibutuhkan
    ```shell
-   python -m pip install -r requiremens.txt
+   python -m pip install -r requirements.txt
    ```
 
 6. Salin file `config.json.example` ke `config.json` atau kalian juga bisa melakukan penamaan ulang pada file `config.json.example` menjadi `config.json`. Kemudian sesuaikan config sesuai keinginnan kalian, kalian bisa melihat [Tentang Config.json](#tentang-configjson) untuk penjelasannya.
@@ -181,7 +181,7 @@ Berikut cara penggunaan dibeberapa operasi sistem
 
 5. Install library yang dibutuhkan
    ```shell
-   python -m pip install -r requiremens.txt
+   python -m pip install -r requirements.txt
    ```
 
 6. Salin file `config.json.example` ke `config.json` atau kalian juga bisa melakukan penamaan ulang pada file `config.json.example` menjadi `config.json`. Kemudian sesuaikan config sesuai keinginnan kalian, kalian bisa melihat [Tentang Config.json](#tentang-configjson) untuk penjelasannya.
@@ -211,7 +211,7 @@ Berikut cara penggunaan dibeberapa operasi sistem
 
 4. Install library yang dibutuhkan
    ```shell
-   python -m pip install -r requiremens.txt
+   python -m pip install -r requirements.txt
    ```
 
 5. Salin file `config.json.example` ke `config.json` atau kalian juga bisa melakukan penamaan ulang pada file `config.json.example` menjadi `config.json`. Kemudian sesuaikan config sesuai keinginnan kalian, kalian bisa melihat [Tentang Config.json](#tentang-configjson) untuk penjelasannya.
