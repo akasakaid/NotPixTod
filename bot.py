@@ -131,7 +131,7 @@ class NotPixTod:
                 if not self.cfg.disable_log:
                     async with aiofiles.open(log_file, "a", encoding="utf-8") as hw:
                         await hw.write(f"{res.status_code} {res.text}\n")
-                if "<title>" in res.text or "upstream request timeout" in res.text:
+                if "<title>" in res.text or "upstream request timeout" in res.text or "upstream connect error or disconnect/reset" in res.text:
                     self.log(f"{yellow}failed get json response !")
                     await countdown(3)
                     continue
