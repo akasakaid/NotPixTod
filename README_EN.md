@@ -139,7 +139,7 @@ Here's how to use it on different operating systems:
    ```
 
 6. Copy `config.json.example` to `config.json` or you can also rename the `config.json.example` file to `config.json`. Then adjust the config according to your preferences, you can see [About Config.json](#about-configjson) for the explanation.
-
+   
    Follow one of the commands below and adjust according to your OS:
    
    Windows CMD/Powershell

@@ -103,8 +103,7 @@ class NotPixTod:
                     res = await self.http(ipinfo3_url, headers)
                     ip = res.json().get("ipAddress")
                     country = res.json().get("countryCode")
-            self.log(
-                f"{green}ip : {white}{ip} {green}country : {white}{country}")
+            self.log(f"{green}ip : {white}{ip} {green}country : {white}{country}")
         except json.decoder.JSONDecodeError:
             self.log(f"{green}ip : {white}None {green}country : {white}None")
 
@@ -133,7 +132,11 @@ class NotPixTod:
                 if not self.cfg.disable_log:
                     async with aiofiles.open(log_file, "a", encoding="utf-8") as hw:
                         await hw.write(f"{res.status_code} {res.text}\n")
-                if "<title>" in res.text or "upstream request timeout" in res.text or "upstream connect error or disconnect/reset" in res.text:
+                if (
+                    "<title>" in res.text
+                    or "upstream request timeout" in res.text
+                    or "upstream connect error or disconnect/reset" in res.text
+                ):
                     self.log(f"{yellow}failed get json response !")
                     await countdown(3)
                     continue
@@ -231,37 +234,31 @@ class NotPixTod:
             self.log(f"{green}login as {white}{first_name} {last_name}")
             data = True
             if return_data:
-                try:
-                    result = await client(
-                        RequestAppWebViewRequest(
-                            peer=bot_username,
-                            app=InputBotAppShortName(
-                                bot_id=await client.get_input_entity(peer=bot_username),
-                                short_name="app",
-                            ),
-                            platform="android",
-                            write_allowed=True,
-                            start_param=self.cfg.start_param,
-                        )
+                result = await client(
+                    RequestAppWebViewRequest(
+                        peer=bot_username,
+                        app=InputBotAppShortName(
+                            bot_id=await client.get_input_entity(peer=bot_username),
+                            short_name="app",
+                        ),
+                        platform="android",
+                        write_allowed=True,
+                        start_param=self.cfg.start_param,
                     )
-                    data = unquote(
-                        result.url.split("#tgWebAppData=")[
-                            1].split("&tgWebAppVersion=")[0]
-                    )
-                except FloodWaitError as e:
-                    self.log(
-                        f"{yellow}Account {phone} is flooded. Waiting for {e.seconds} seconds.")
-                    return {"flooded": True, "wait_time": e.seconds}
+                )
+                data = unquote(
+                    result.url.split("#tgWebAppData=")[1].split("&tgWebAppVersion=")[0]
+                )
             if client.is_connected():
                 await client.disconnect()
             return data
         except (UserDeactivatedBanError, UserDeactivatedError, PhoneNumberBannedError):
-            self.log(
-                f"{white}{phone}{red}account/phone has banned from telegram !")
+            self.log(f"{white}{phone}{red}account/phone has banned from telegram !")
             return None
         except FloodWaitError as e:
             self.log(
-                f"{yellow}Account {phone} is flooded. Waiting for {e.seconds} seconds.")
+                f"{yellow}account {phone} is flooded. waiting for {e.seconds} seconds."
+            )
             return {"flooded": True, "wait_time": e.seconds}
 
     def marinkitagawa(self, phone):
@@ -278,12 +275,10 @@ class NotPixTod:
         query = await self.telegram_login(phone=phone, proxy=proxy, return_data=True)
         if query is None:
             return
-        if isinstance(query, dict) and query.get('flooded'):
-            self.log(f"{yellow}Account {phone} is flooded. Skipping for now.")
+        if isinstance(query, dict) and query.get("flooded"):
+            self.log(f"{yellow}account {phone} is flooded. skipping for now.")
             return
-
-        def marin(data): return {key: value[0]
-                                 for key, value in parse_qs(data).items()}
+        marin = lambda data: {key: value[0] for key, value in parse_qs(data).items()}
         parser = marin(query)
         user = parser.get("user")
         uid = re.search(r'id":(.*?),', user).group(1)
@@ -422,8 +417,7 @@ async def main():
             option = args.action
         else:
             print(main_menu)
-            option = input(
-                f"{white}[{yellow}?{white}] {yellow}input number : {reset}")
+            option = input(f"{white}[{yellow}?{white}] {yellow}input number : {reset}")
         if option == "1":
             phone = input(
                 f"{white}[{yellow}?{white}] {yellow}input phone number : {reset}"

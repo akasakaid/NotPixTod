@@ -148,19 +148,19 @@ Berikut cara penggunaan dibeberapa operasi sistem
 
 6. Salin file `config.json.example` ke `config.json` atau kalian juga bisa melakukan penamaan ulang pada file `config.json.example` menjadi `config.json`. Kemudian sesuaikan config sesuai keinginnan kalian, kalian bisa melihat [Tentang Config.json](#tentang-configjson) untuk penjelasannya.
 
-Ikuti salah satu perintah dibawah dan sesuaikan dengan os kalian:
-
-Windows CMD / Powershell
-
-```shell
-copy config.json.example config.json
-```
-
-Linux/Unix
-
-```shell
-cp config.json.example config.json
-```
+   Ikuti salah satu perintah dibawah dan sesuaikan dengan os kalian:
+   
+   Windows CMD / Powershell
+   
+   ```shell
+   copy config.json.example config.json
+   ```
+   
+   Linux/Unix
+   
+   ```shell
+   cp config.json.example config.json
+   ```
    
 7. Jalankan/ eksekusi file utama 
    ```shell
@@ -200,19 +200,19 @@ cp config.json.example config.json
 
 6. Salin file `config.json.example` ke `config.json` atau kalian juga bisa melakukan penamaan ulang pada file `config.json.example` menjadi `config.json`. Kemudian sesuaikan config sesuai keinginnan kalian, kalian bisa melihat [Tentang Config.json](#tentang-configjson) untuk penjelasannya.
 
-Ikuti salah satu perintah dibawah dan sesuaikan dengan os kalian:
+   Ikuti salah satu perintah dibawah dan sesuaikan dengan os kalian:
 
-Windows CMD / Powershell
+   Windows CMD / Powershell
 
-```shell
-copy config.json.example config.json
-```
+   ```shell
+   copy config.json.example config.json
+   ```
 
-Linux/Unix
+   Linux/Unix
 
-```shell
-cp config.json.example config.json
-```
+   ```shell
+   cp config.json.example config.json
+   ```
    
 7. Jalankan/ eksekusi file utama 
    ```shell
@@ -244,19 +244,19 @@ cp config.json.example config.json
 
 5. Salin file `config.json.example` ke `config.json` atau kalian juga bisa melakukan penamaan ulang pada file `config.json.example` menjadi `config.json`. Kemudian sesuaikan config sesuai keinginnan kalian, kalian bisa melihat [Tentang Config.json](#tentang-configjson) untuk penjelasannya.
 
-Ikuti salah satu perintah dibawah dan sesuaikan dengan os kalian:
+   Ikuti salah satu perintah dibawah dan sesuaikan dengan os kalian:
 
-Windows CMD / Powershell
+   Windows CMD / Powershell
 
-```shell
-copy config.json.example config.json
-```
+   ```shell
+   copy config.json.example config.json
+   ```
 
-Linux/Unix
+   Linux/Unix
 
-```shell
-cp config.json.example config.json
-```
+   ```shell
+   cp config.json.example config.json
+   ```
    
 6. Jalankan/ eksekusi file utama 
    ```shell
