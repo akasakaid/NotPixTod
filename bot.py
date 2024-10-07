@@ -21,6 +21,7 @@ from telethon.errors import (
     UserDeactivatedBanError,
     UserDeactivatedError,
     PhoneNumberBannedError,
+    FloodWaitError,
 )
 from colorama import init, Fore, Style
 from datetime import datetime
@@ -102,7 +103,8 @@ class NotPixTod:
                     res = await self.http(ipinfo3_url, headers)
                     ip = res.json().get("ipAddress")
                     country = res.json().get("countryCode")
-            self.log(f"{green}ip : {white}{ip} {green}country : {white}{country}")
+            self.log(
+                f"{green}ip : {white}{ip} {green}country : {white}{country}")
         except json.decoder.JSONDecodeError:
             self.log(f"{green}ip : {white}None {green}country : {white}None")
 
@@ -229,27 +231,38 @@ class NotPixTod:
             self.log(f"{green}login as {white}{first_name} {last_name}")
             data = True
             if return_data:
-                result = await client(
-                    RequestAppWebViewRequest(
-                        peer=bot_username,
-                        app=InputBotAppShortName(
-                            bot_id=await client.get_input_entity(peer=bot_username),
-                            short_name="app",
-                        ),
-                        platform="android",
-                        write_allowed=True,
-                        start_param=self.cfg.start_param,
+                try:
+                    result = await client(
+                        RequestAppWebViewRequest(
+                            peer=bot_username,
+                            app=InputBotAppShortName(
+                                bot_id=await client.get_input_entity(peer=bot_username),
+                                short_name="app",
+                            ),
+                            platform="android",
+                            write_allowed=True,
+                            start_param=self.cfg.start_param,
+                        )
                     )
-                )
-                data = unquote(
-                    result.url.split("#tgWebAppData=")[1].split("&tgWebAppVersion=")[0]
-                )
+                    data = unquote(
+                        result.url.split("#tgWebAppData=")[
+                            1].split("&tgWebAppVersion=")[0]
+                    )
+                except FloodWaitError as e:
+                    self.log(
+                        f"{yellow}Account {phone} is flooded. Waiting for {e.seconds} seconds.")
+                    return {"flooded": True, "wait_time": e.seconds}
             if client.is_connected():
                 await client.disconnect()
             return data
         except (UserDeactivatedBanError, UserDeactivatedError, PhoneNumberBannedError):
-            self.log(f"{white}{phone}{red}account/phone has banned from telegram !")
+            self.log(
+                f"{white}{phone}{red}account/phone has banned from telegram !")
             return None
+        except FloodWaitError as e:
+            self.log(
+                f"{yellow}Account {phone} is flooded. Waiting for {e.seconds} seconds.")
+            return {"flooded": True, "wait_time": e.seconds}
 
     def marinkitagawa(self, phone):
         x = "".join(filter(str.isdigit, phone))
@@ -265,7 +278,12 @@ class NotPixTod:
         query = await self.telegram_login(phone=phone, proxy=proxy, return_data=True)
         if query is None:
             return
-        marin = lambda data: {key: value[0] for key, value in parse_qs(data).items()}
+        if isinstance(query, dict) and query.get('flooded'):
+            self.log(f"{yellow}Account {phone} is flooded. Skipping for now.")
+            return
+
+        def marin(data): return {key: value[0]
+                                 for key, value in parse_qs(data).items()}
         parser = marin(query)
         user = parser.get("user")
         uid = re.search(r'id":(.*?),', user).group(1)
@@ -404,7 +422,8 @@ async def main():
             option = args.action
         else:
             print(main_menu)
-            option = input(f"{white}[{yellow}?{white}] {yellow}input number : {reset}")
+            option = input(
+                f"{white}[{yellow}?{white}] {yellow}input number : {reset}")
         if option == "1":
             phone = input(
                 f"{white}[{yellow}?{white}] {yellow}input phone number : {reset}"
