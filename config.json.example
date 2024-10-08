@@ -3,12 +3,17 @@
     "api_hash": "d82c81323285aeb9c2ba9ee420d8b009",
     "referral_code": "f629438076",
     "colors": [
-        "#BE0039"
+        "#E46E6E",
+        "#E46E6E"
     ],
-    "auto_upgrade": false,
+    "auto_upgrade": {
+        "energyLimit": false,
+        "paintReward": false,
+        "reChargeSpeed": false
+    },
     "countdown": 3600,
     "time_before_start": [
-        30,
-        60
+        10,
+        230
     ]
 }

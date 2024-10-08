@@ -29,8 +29,9 @@ Ikuti tautan berikut untuk mendaftar : [https://t.me/notpixel/app?startapp=f6294
 - [x] Otomatis Melakukan Paint
 - [x] Otomatis Klaim Mining
 - [x] Otomatis Upgrade Boost
-- [x] Mendukung Proxy
+- [x] Mendukung Penggunaan Proxy
 - [x] Menggunakan fake useragent
+- [x] Mengikuti event saldo x3
 
 # Dukung saya
 
@@ -63,7 +64,7 @@ Berikut penjelasan untuk tentang isi config.json
 | api_hash          | untuk mengisi kunci ini bisa mendaftar terlebih dahulu di my.telegram.org/apps, ini tidak wajib anda bisa menggunakan milik saya yang sudah tersimpan di file `config.json.example`                                                                                                                                          |
 | referral_code     | pada kunci ini diisi kode undangan akun utama kalian                                                                                                                                                                                                                                                                         |
 | colors            | pada kunci ini diisi daftar warna yang ingin di terapkan ke kanvas kalian bisa mendapatkan kode warna (hexcode) didalam bot telegramnya (ikut format yang ada). Anda bisa menonton video berikut untuk mengetahui bagaimana cara mendapatkan hex color dari bot [https://youtu.be/r7qhx95gwVw](https://youtu.be/r7qhx95gwVw) |
-| auto_upgrade      | kunci ini untuk mengaktifkan fitur auto upgrade, isi true untuk mengaktifkannya dan untuk menonaktifkannya                                                                                                                                                                                                                   |
+| auto_upgrade      | kunci ini untuk mengaktifkan fitur auto upgrade, didalamnya terdapat beberapa key/kunci lagi berikan value/isi `true` untuk mengaktifkannya dan beri value/isi `false` untuk menonaktifkannya                                                                                                                                |
 | countdown         | kunci ini untuk memberikan seberapa lama waktu tunggu untuk mengisi energi, kunci ini diisi dengan nilai positif (satuan detik)                                                                                                                                                                                              |
 | time_before_start | kunci ini digunakan untuk membuat waktu muncur secara acak sebelum memulai menjalankan script, kunci memiliki 2 nilai yang perlu diisi \[kecil,besar\], contoh seperti tertera di config itu sendiri (satuan : detik)                                                                                                        |
 

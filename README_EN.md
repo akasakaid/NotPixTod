@@ -29,6 +29,7 @@ Follow this link to register: [https://t.me/notpixel/app?startapp=f629438076](ht
 - [x] Automatic Boost Upgrades
 - [x] Proxy Support
 - [x] Uses fake user agent
+- [x] Participate in balance event x3
 
 # Support Me
 
@@ -61,7 +62,7 @@ Here's an explanation of the config.json contents:
 | api_hash          | To fill this key, you can register first at my.telegram.org/apps. This is not mandatory; you can use mine which is already stored in the `config.json.example` file                                                                                                                                 |
 | referral_code     | Fill this key with your main account's invitation code                                                                                                                                                                                                                                              |
 | colors            | Fill this key with a list of colors you want to apply to the canvas. You can get the color codes (hexcode) inside the Telegram bot (follow the existing format). You can watch this video to learn how to get hex colors from the bot: [https://youtu.be/r7qhx95gwVw](https://youtu.be/r7qhx95gwVw) |
-| auto_upgrade      | This key is to activate the auto upgrade feature, set to true to enable it and false to disable it                                                                                                                                                                                                  |
+| auto_upgrade      | this key is to activate the auto upgrade feature, inside there are several more keys, give value/fill `true` to activate it and give value/fill `false` to deactivate it.                                                                                                                           |
 | countdown         | This key determines how long to wait for energy to fill up, fill this key with a positive value (in seconds)                                                                                                                                                                                        |
 | time_before_start | This key is used to create random countdown times before starting the script, the key has 2 values that need to be filled [small,large], example as shown in the config itself (unit: seconds)                                                                                                      |
 

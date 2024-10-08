@@ -70,6 +70,7 @@ class Config:
 
 class NotPixTod:
     def __init__(self, no, config, proxies):
+        ci = lambda a, b: (b * 1000) + (a + 1)
         self.cfg: Config = config
         self.p = no
         self.proxies = proxies
@@ -79,6 +80,61 @@ class NotPixTod:
             self.ses = httpx.AsyncClient(transport=transport, timeout=1000)
         else:
             self.ses = httpx.AsyncClient(timeout=1000)
+        self.colors = [
+            "#3690ea",
+            "#e46e6e",
+            "#ffffff",
+            "#be0039",
+            "#6d001a",
+            "#ffd635",
+            "#ff9600",
+            "#bf4300",
+            "#7eed56",
+            "#00cc78",
+            "#00a368",
+        ]
+        self.block = {
+            "#3690EA": [
+                [ci(448, 595), ci(470, 595)],
+                [ci(448, 594), ci(470, 594)],
+                [ci(448, 593), ci(470, 593)],
+                [ci(448, 592), ci(470, 592)],
+                [ci(448, 591), ci(470, 591)],
+                [ci(448, 590), ci(470, 590)],
+                [ci(448, 589), ci(470, 589)],
+                [ci(448, 588), ci(470, 588)],
+                [ci(448, 587), ci(470, 587)],
+                [ci(448, 586), ci(470, 586)],
+                [ci(448, 585), ci(470, 585)],
+                [ci(448, 584), ci(470, 584)],
+                [ci(448, 583), ci(470, 583)],
+                [ci(448, 582), ci(470, 582)],
+                [ci(448, 581), ci(470, 581)],
+                [ci(532, 593), ci(595, 593)],
+                [ci(532, 592), ci(595, 592)],
+                [ci(532, 591), ci(595, 591)],
+                [ci(532, 590), ci(595, 590)],
+                [ci(532, 589), ci(595, 589)],
+                [ci(532, 588), ci(595, 588)],
+                [ci(532, 587), ci(595, 587)],
+                [ci(532, 586), ci(595, 586)],
+                [ci(532, 585), ci(595, 585)],
+                [ci(532, 584), ci(595, 584)],
+                [ci(532, 583), ci(595, 583)],
+                [ci(532, 582), ci(595, 582)],
+                [ci(532, 581), ci(595, 581)],
+                [ci(532, 580), ci(595, 580)],
+                [ci(532, 579), ci(595, 579)],
+                [ci(532, 578), ci(595, 578)],
+                [ci(532, 577), ci(595, 577)],
+                [ci(532, 576), ci(595, 576)],
+                [ci(532, 575), ci(595, 575)],
+                [ci(532, 574), ci(595, 574)],
+                [ci(532, 573), ci(595, 573)],
+                [ci(532, 572), ci(595, 572)],
+                [ci(532, 571), ci(595, 571)],
+            ]
+        }
 
     def log(self, msg):
         now = datetime.now().isoformat().split("T")[1].split(".")[0]
@@ -132,11 +188,7 @@ class NotPixTod:
                 if not self.cfg.disable_log:
                     async with aiofiles.open(log_file, "a", encoding="utf-8") as hw:
                         await hw.write(f"{res.status_code} {res.text}\n")
-                if (
-                    "<title>" in res.text
-                    or "upstream request timeout" in res.text
-                    or "upstream connect error or disconnect/reset" in res.text
-                ):
+                if "<title>" in res.text or res.text[0] != "{":
                     self.log(f"{yellow}failed get json response !")
                     await countdown(3)
                     continue
@@ -305,21 +357,34 @@ class NotPixTod:
         res = await self.http(me_url, headers)
         while True:
             res = await self.http(status_url, headers)
-            balance = res.json().get("userBalance", 0)
+            balance = int(res.json().get("userBalance", 0))
             await update_balance(uid, balance)
             self.log(f"{green}account balance : {white}{balance}")
-            charges = res.json().get("charges")
+            charges = res.json().get("charges") // 2
             if charges <= 0:
                 break
             for i in range(charges):
                 pixel_id = random.randint(1, 1000000)
-                new_color = random.choice(self.cfg.colors)
-                data = {"pixelId": pixel_id, "newColor": new_color}
-                res = await self.http(paint_url, headers, json.dumps(data))
-                if res.status_code != 200:
-                    self.log(f"failed paint pixel id : {white}{pixel_id}")
-                    continue
-                self.log(f"{green}success paint pixel id : {white}{pixel_id}")
+                new_color = random.choice(list(self.block.keys())).upper()
+                temp_color = [color.upper() for color in self.colors]
+                temp_color.remove(new_color)
+                first_color = random.choice(temp_color).upper()
+                pixel_id = random.choice(random.choice(self.block[new_color]))
+                for i in range(2):
+                    if i == 0:
+                        data = {"pixelId": pixel_id, "newColor": first_color}
+                    else:
+                        data = {"pixelId": pixel_id, "newColor": new_color}
+                    res = await self.http(paint_url, headers, json.dumps(data))
+                    if res.status_code != 200:
+                        self.log(f"failed paint pixel id : {white}{pixel_id}")
+                        continue
+                    new_balance = int(res.json().get("balance"))
+                    inc = new_balance - balance
+                    balance = new_balance
+                    self.log(
+                        f"{green}success paint id : {white}{pixel_id}{green},{white}reward {green}+{inc}"
+                    )
                 await countdown(3)
         res = await self.http(claim_url, headers)
         if res.status_code != 200:
@@ -327,10 +392,9 @@ class NotPixTod:
         else:
             claimed = res.json().get("claimed")
             self.log(f"{green}success claim mining, {white}{claimed}")
-        if self.cfg.auto_upgrade:
-            self.log(f"{yellow}auto buy boost is enable !")
-            for boost in boosts:
-                buy_url = f"{boost_buy_url}{boost}"
+        for boost in boosts:
+            buy_url = f"{boost_buy_url}{boost}"
+            if self.cfg.auto_upgrade[boost]:
                 res = await self.http(buy_url, headers)
                 if res.status_code != 200:
                     self.log(f"{red}failed buy booster {white}{boost}")
